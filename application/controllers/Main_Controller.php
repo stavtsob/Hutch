@@ -1,0 +1,22 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Main_Controller extends CI_Controller {
+        private $settings;
+        
+        public function __construct()
+        {
+                parent::__construct();
+                $this->load->helper('url');
+                $this->config->load('hutch_config',TRUE);
+                $this->settings = $this->config->item('hutch_config');
+        }
+
+	public function index()
+	{
+        $data['app_name'] = $this->settings['app_name'];
+        $this->load->view('basics/header',$data);
+        $this->load->view('storage/list_products',$data);
+        $this->load->view('basics/footer',$data);
+	}
+}
