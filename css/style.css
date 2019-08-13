@@ -1,6 +1,29 @@
 .main
 {
-    margin-left:10%;
+    margin-left:15%;
     margin-top: 25px;
-    width: 80%;
+    width: 70%;
+}
+.noSelect:checked {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+}
+#color_box
+{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    position: absolute;
+    left: 55%;
+    top: 3%;
+}
+input[type="number"]
+{
+    max-width: 150px;
+    text-align: center;
 }
