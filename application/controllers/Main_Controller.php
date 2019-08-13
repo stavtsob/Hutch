@@ -14,9 +14,16 @@ class Main_Controller extends CI_Controller {
 
 	public function index()
 	{
-        $data['app_name'] = $this->settings['app_name'];
-        $this->load->view('basics/header',$data);
-        $this->load->view('storage/list_products',$data);
-        $this->load->view('basics/footer',$data);
-	}
+                $data['app_name'] = $this->settings['app_name'];
+                $this->load->view('basics/header',$data);
+                $this->load->view('storage/list_products',$data);
+                $this->load->view('basics/footer',$data);
+        }
+        public function add_product_view()
+        {
+                $data['app_name'] = $this->settings['app_name'];
+                $this->load->view('basics/header',$data);
+                $this->load->view('storage/add_product',$data);
+                $this->load->view('basics/footer',$data);
+        }
 }

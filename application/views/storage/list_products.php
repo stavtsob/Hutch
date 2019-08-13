@@ -1,5 +1,9 @@
-<div class="main">
-<h3>Λίστα προιόντων στην αποθήκη</h3>
+<div class="table_title">
+  <h3 style="display: inline-block;">Λίστα προιόντων στην αποθήκη</h3>
+  <a href="<?php echo base_url() ?>index.php/add_product">
+    <button type="button" id="addproduct_btn" class="btn btn-success">Προσθήκη προιόντος</button>
+  </a>
+</div>
 <table class="table">
   <thead class="thead-dark">
     <tr>
