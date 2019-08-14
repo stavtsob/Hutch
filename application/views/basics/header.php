@@ -2,7 +2,7 @@
 <head>
 <link rel="stylesheet" href="<?php echo base_url('css/style.css');?>">
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <title><?php echo $app_name;?> - Warehouse Management System</title>
 </head>
 <body>
@@ -25,9 +25,26 @@
         <a class="nav-link" href="#">Αποσύνδεση</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Γράψε το Barcode">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ψάξε</button>
+    <form class="form-inline my-2 my-lg-0" method="GET" action="<?php echo base_url('index.php/view_product')?>">
+      <input name="barcode" class="form-control mr-sm-2" type="search" placeholder="Γράψε το Barcode">
+      <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Ψάξε!" >
     </form>
   </div>
   </nav>
+  <!-- SHOW NOTIFICATIONS !-->
+  <?php if(isset($notification)){ ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $notification;?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div><?php } ?>
+  <!-- SHOW ERRORS !-->
+  <?php if(isset($error)){ ?>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <?php echo $error;?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div><?php } ?>
+  

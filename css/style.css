@@ -72,3 +72,16 @@ table
 {
     margin-top: 20px;
 }
+tr:nth-child(even)
+{
+    background-color: #ffe0b3;
+}
+td,th
+{
+    border-style:none;
+}
+.round-btn
+{
+    border-radius: 50%!important;
+    margin-right: 15px;
+}

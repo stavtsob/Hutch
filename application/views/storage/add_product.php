@@ -17,19 +17,19 @@
     <div class="form-group row">
         <label for="barcode" class="col-sm-2 col-form-label">BarCode</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="barcode" name="barcode" placeholder="Barcode προιόντος">
+        <input type="text" class="form-control" id="barcode" name="barcode" placeholder="Barcode προιόντος" required>
         </div>
     </div>
     <div class="form-group row">
         <label for="price" class="col-sm-2 col-form-label" >Τιμή</label>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="price" name="price" placeholder="Τιμή προιόντος"  step="0.01" min="0">
+        <input type="number" class="form-control" id="price" name="price" placeholder="Τιμή προιόντος"  step="0.01" min="0" required>
         </div>
     </div>
     <div class="form-group row">
         <label for="stock" class="col-sm-2 col-form-label">Ποσότητα</label>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="stock" name="stock">
+        <input type="number" class="form-control" id="stock" name="stock" min="0" required>
         </div>
     </div>
     <div class="form-group row">
