@@ -1,8 +1,10 @@
-<div id="notif" class="alert alert-warning alert-dismissible fade show" role="alert" style='display: none;'>
-  <span id="notif_text"></span>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
+<div id="notifications">
+    <div id="notif" class="alert alert-warning alert-dismissible fade show" role="alert" style='display: none; margin-bottom: 0px;'>
+    <span id="notif_text"></span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
 </div>
 <div class="addproduct_form">
 <?php echo validation_errors(); ?>
@@ -19,7 +21,7 @@
         </div>
     </div>
     <h3>Επεξεργασία προιόντος</h3>
-    <form method="POST" action="<?php echo base_url('index.php/add_product_request');?>">
+    <form method="POST" action="">
     <div class="form-group row" >
         <label for="name" class="col-sm-2 col-form-label">Όνομα</label>
         <div class="col-sm-10">
@@ -85,7 +87,6 @@
             </textarea>
         </div>
     </div>
-    <input type="submit" class="btn btn-success" value="Προσθήκη!" style="margin-top: 130px;">
     </div>
 </form>
 </div>
@@ -97,6 +98,7 @@
         });
 </script>
 <script type="text/javascript">
+    var notification_count=0;
     $("#increase_btn").click(function(){
 
 
@@ -116,14 +118,19 @@
                 }
             else
             {
-                    var item = JSON.parse(data);
-                    $('#stock').attr('value', item.stock);
-                    $('#notif').show();
-                    if(quantity < 0)
-                    {
-                        quantity = quantity*(-1);
-                    }
-                    $('#notif_text').text('Προστέθηκαν '+quantity+' στο απόθεμα του προιόντος.');
+                var notif = document.getElementById("notif");
+                var new_notif = notif.cloneNode(true);
+                notification_count++;
+                new_notif.setAttribute("id", "notif_"+notification_count)
+                var item = JSON.parse(data);
+                new_notif.childNodes[0].textContent='Προστέθηκαν '+quantity+' στο απόθεμα του προιόντος.';
+                document.getElementById("notifications").appendChild(new_notif);
+                $('#stock').attr('value', item.stock);
+                $('#notif_'+notification_count).show();
+                if(quantity < 0)
+                {
+                    quantity = quantity*(-1);
+                }
             }
            }
         });
@@ -146,15 +153,21 @@
                     alert('Κάτι πήγε λάθος. Παρακαλώ να ελέγξετε αν η ποσότητα που θέλετε να αφαιρέσετε είναι μικρότερη η ίση από το υπάρχων απόθεμα.');
                 }
                 else
-                {
+                {   
+                    var notif = document.getElementById("notif");
+                    var new_notif = notif.cloneNode(true);
+                    notification_count++;
+                    new_notif.setAttribute("id", "notif_"+notification_count)
                     var item = JSON.parse(data);
+                    new_notif.childNodes[0].textContent='Αφαιρέθηκαν '+quantity+' στο απόθεμα του προιόντος.';
+                    document.getElementById("notifications").appendChild(new_notif);
                     $('#stock').attr('value', item.stock);
-                    $('#notif').show();
+                    $('#notif_'+notification_count).show();
                     if(quantity < 0)
                     {
                         quantity = quantity*(-1);
                     }
-                    $('#notif_text').text('Αφαιρέθηκαν '+quantity+' στο απόθεμα του προιόντος.');
+                    
                 }
             }
         });

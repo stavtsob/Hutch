@@ -52,7 +52,7 @@ class Product_Controller extends CI_Controller {
                 }
                 if(!empty($expires_at))
                 {
-                    $data['expires_at'] = $expires_at;
+                    $data['expires_at'] = date($expires_at);
                 }
                 $this->item_model->insert($data);
                 $this->session->set_flashdata('new_product', 'Ένα νέο προιόν με όνομα '.$name.' προστέθηκε.');
