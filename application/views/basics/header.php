@@ -16,18 +16,18 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-         <a class="nav-link" href="<?php echo base_url() ?>index.php/">Αποθήκη <span class="sr-only">(current)</span></a>
+         <a class="nav-link" href="<?php echo base_url() ?>index.php/"><?php echo $lang->line('warehouse'); ?> <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Ιστορικό</a>
+        <a class="nav-link" href="#"><?php echo $lang->line('history'); ?></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Αποσύνδεση</a>
+        <a class="nav-link" href="#"><?php echo $lang->line('logout'); ?></a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" method="GET" action="<?php echo base_url('index.php/view_product')?>">
-      <input name="barcode" class="form-control mr-sm-2" type="search" placeholder="Γράψε το Barcode">
-      <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Ψάξε!" >
+      <input name="barcode" class="form-control mr-sm-2" type="search" placeholder="<?php echo $lang->line('search_placeholder'); ?>">
+      <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="<?php echo $lang->line('search_button'); ?>" >
     </form>
   </div>
   </nav>

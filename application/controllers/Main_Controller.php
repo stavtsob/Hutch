@@ -10,6 +10,8 @@ class Main_Controller extends CI_Controller {
                 $this->load->helper('url');
                 $this->config->load('hutch_config',TRUE);
                 $this->settings = $this->config->item('hutch_config');
+                //change language labels in /system/language folder files
+                $this->lang->load('products','english');
         }
 
 	public function index()
@@ -21,6 +23,7 @@ class Main_Controller extends CI_Controller {
         }
         public function add_product_view()
         {
+                $data['lang'] = $this->lang;
                 $data['app_name'] = $this->settings['app_name'];
                 $this->load->view('basics/header',$data);
                 $this->load->view('storage/add_product',$data);

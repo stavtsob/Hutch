@@ -11,10 +11,13 @@ class Product_Controller extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->library('session');
+        //change language labels in /system/language folder files
+        $this->lang->load('products','english');
     }
 
     public function create_product()
     {
+        $data['lang'] = $this->lang;
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             //required fields
@@ -58,14 +61,12 @@ class Product_Controller extends CI_Controller {
                 $this->session->set_flashdata('new_product', 'Ένα νέο προιόν με όνομα '.$name.' προστέθηκε.');
                 redirect(base_url() .'index.php', 'refresh');
             }
-            else{
-                echo 'test';
-            }
         }
     }
 
     public function view_product()
     {
+        $data['lang'] = $this->lang;
         if($_SERVER['REQUEST_METHOD'] == 'GET')
         {
            $barcode = $this->input->get('barcode');
@@ -98,6 +99,7 @@ class Product_Controller extends CI_Controller {
     public function list_products()
     {
         $data['app_name'] = 'Hutch';
+        $data['lang'] = $this->lang;
         $data['items'] = $this->item_model->getAll();
         $flashdata = $this->session->flashdata();
         if(isset($flashdata['new_product']))
