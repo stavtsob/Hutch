@@ -2,10 +2,10 @@
 -- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Φιλοξενητής: 127.0.0.1
--- Χρόνος δημιουργίας: 14 Αυγ 2019 στις 19:00:04
--- Έκδοση διακομιστή: 10.3.16-MariaDB
--- Έκδοση PHP: 7.3.8
+-- Host: 127.0.0.1
+-- Generation Time: Aug 26, 2019 at 01:03 PM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Βάση δεδομένων: `inv_mng`
+-- Database: `inv_mng`
 --
 
 -- --------------------------------------------------------
 
 --
--- Δομή πίνακα για τον πίνακα `activity`
+-- Table structure for table `activity`
 --
 
 CREATE TABLE `activity` (
@@ -39,74 +39,96 @@ CREATE TABLE `activity` (
 -- --------------------------------------------------------
 
 --
--- Δομή πίνακα για τον πίνακα `item`
+-- Table structure for table `barcode`
+--
+
+CREATE TABLE `barcode` (
+  `id` int(11) NOT NULL,
+  `code` varchar(200) COLLATE utf8_bin NOT NULL,
+  `item_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item`
 --
 
 CREATE TABLE `item` (
   `id` int(11) NOT NULL,
   `name` varchar(100) COLLATE utf8_bin NOT NULL,
   `brand` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `barcode` varchar(200) COLLATE utf8_bin NOT NULL,
   `notes` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `color` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `size` varchar(15) COLLATE utf8_bin DEFAULT NULL,
   `price` float DEFAULT NULL,
   `stock` int(11) NOT NULL,
-  `date_created` timestamp NULL DEFAULT NULL,
+  `date_created` date DEFAULT NULL,
   `expires_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Άδειασμα δεδομένων του πίνακα `item`
---
-
-INSERT INTO `item` (`id`, `name`, `brand`, `barcode`, `notes`, `color`, `size`, `price`, `stock`, `date_created`, `expires_at`) VALUES
-(1, 'Υαλοκαθαριστήρες 50cm E321A', 'Bosch', '223-135-882-A3CK', 'Πολύ καλή ποιότητα', 'red', NULL, 7.5, 20, '2019-08-14 15:55:58', '2050-08-31'),
-(2, 'Ζάντες Raptor 0.8m ', 'Honda', '326-452-129-FF12', '            ', 'silver', NULL, 85.9, 11, '2019-08-14 15:57:31', NULL);
-
---
--- Ευρετήρια για άχρηστους πίνακες
+-- Indexes for dumped tables
 --
 
 --
--- Ευρετήρια για πίνακα `activity`
+-- Indexes for table `activity`
 --
 ALTER TABLE `activity`
   ADD PRIMARY KEY (`id`),
   ADD KEY `item_id` (`item_id`);
 
 --
--- Ευρετήρια για πίνακα `item`
+-- Indexes for table `barcode`
+--
+ALTER TABLE `barcode`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `code` (`code`),
+  ADD KEY `barcode_ibfk_1` (`item_id`);
+
+--
+-- Indexes for table `item`
 --
 ALTER TABLE `item`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `barcode` (`barcode`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT για άχρηστους πίνακες
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT για πίνακα `activity`
+-- AUTO_INCREMENT for table `activity`
 --
 ALTER TABLE `activity`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT για πίνακα `item`
+-- AUTO_INCREMENT for table `barcode`
+--
+ALTER TABLE `barcode`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- Περιορισμοί για άχρηστους πίνακες
+-- Constraints for dumped tables
 --
 
 --
--- Περιορισμοί για πίνακα `activity`
+-- Constraints for table `activity`
 --
 ALTER TABLE `activity`
   ADD CONSTRAINT `item_id` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
+
+--
+-- Constraints for table `barcode`
+--
+ALTER TABLE `barcode`
+  ADD CONSTRAINT `barcode_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

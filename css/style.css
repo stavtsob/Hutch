@@ -4,7 +4,6 @@ body
 }
 .main
 {
-    height:100%;
     margin-left:10%;
     /*margin-top: 25px;*/
     width: 80%;
@@ -84,4 +83,9 @@ td,th
 {
     border-radius: 50%!important;
     margin-right: 15px;
+}
+#notifications
+{
+    position: absolute;
+    z-index: 100000;
 }

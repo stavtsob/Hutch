@@ -4,20 +4,23 @@
         public function __construct()
         {
             $this->load->database();
+            $this->load->model('barcode_model');
         }
         public function insert($data)
         {
-            $this->db->insert('item', $data);            
+           $res= $this->db->insert('item', $data); 
+           $item_id = $this->db->insert_id();
+           return $item_id;           
         }
         public function getAll()
         {
             $query = $this->db->get('item');
             return $query->result_array();
         }
-
-        public function getByBarcode($barcode)
+        
+        public function getById($id)
         {
-            $this->db->where('barcode',$barcode);
+            $this->db->where('id',$id);
             $query = $this->db->get('item');
             if($query)
             {
@@ -25,16 +28,13 @@
             }
             return false;
         }
-        public function increaseStock($barcode,$quantity)
+        public function increaseStock($item_id,$quantity)
         {
-            //retrieve old value
-            $this->db->where('barcode',$barcode);
-            $query = $this->db->get('item');
-            if($query === FALSE)
+            $result = $this->getById($item_id);
+            if($result === FALSE)
             {
                 return false;
             }
-            $result = $query->row_array();
             //make quantity a positive value
             if($quantity <0)
             {
@@ -46,19 +46,16 @@
             );
             //update stock value on the database
             $this->db->set($data);
-            $this->db->where('barcode',$barcode);
+            $this->db->where('id',$item_id);
             $query = $this->db->update('item');
         }
-        public function decreaseStock($barcode,$quantity)
+        public function decreaseStock($item_id,$quantity)
         {
-            //retrieve old value
-            $this->db->where('barcode',$barcode);
-            $query = $this->db->get('item');
-            if($query === FALSE)
+            $result = $this->getById($item_id);
+            if($result === FALSE)
             {
                 return false;
             }
-            $result = $query->row_array();
             //make quantity a positive value
             if($quantity <0)
             {
@@ -79,17 +76,17 @@
             );
             //update stock value on the database
             $this->db->set($data);
-            $this->db->where('barcode',$barcode);
+            $this->db->where('id',$item_id);
             $query = $this->db->update('item');
         }
         public function deleteById($id)
         {
-            $this->db->where('doli_id',$id);
-            $this->db->delete('project');
+            $this->db->where('id',$id);
+            $this->db->delete('item');
         }
         public function wipeItems()
         {
-            $this->db->empty_table('project');
+            $this->db->empty_table('item');
         }
     }
 ?>

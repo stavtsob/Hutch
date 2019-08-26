@@ -7,34 +7,35 @@ class Ajax_Controller extends CI_Controller {
         {
             parent::__construct();
             $this->load->model('item_model');
+            $this->load->model('barcode_model');
             $this->load->helper('url');
             $this->load->library('session');
         }
 
         public function increase_item_stock()
         {
-            $barcode = $this->input->post('barcode');
+            $item_id = $this->input->post('id');
             $quantity = $this->input->post('quantity');
-            $result = $this->item_model->increaseStock($barcode, $quantity);
+            $result = $this->item_model->increaseStock($item_id, $quantity);
             if($result === FALSE)
             {
                 echo 'ERROR 500';
                 return;
             }
-            $updated_item = $this->item_model->getByBarcode($barcode);
+            $updated_item = $this->item_model->getById($item_id);
             echo json_encode($updated_item);
         }
         public function decrease_item_stock()
         {
-            $barcode = $this->input->post('barcode');
+            $item_id = $this->input->post('id');
             $quantity = $this->input->post('quantity');
-            $result = $this->item_model->decreaseStock($barcode, $quantity);
+            $result = $this->item_model->decreaseStock($item_id, $quantity);
             if($result === FALSE)
             {
                 echo 'ERROR 500';
                 return;
             }
-            $updated_item = $this->item_model->getByBarcode($barcode);
+            $updated_item = $this->item_model->getById($item_id);
             echo json_encode($updated_item);
         }
 }
