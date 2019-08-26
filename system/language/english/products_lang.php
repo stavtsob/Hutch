@@ -18,12 +18,14 @@ $lang['change_product_stock'] = 'Add/Sub in product stock';
 $lang['edit_product'] = 'Edit Product';
 $lang['add_product'] = 'Add Product';
 $lang['view_product'] = 'View';
+$lang['delete_product'] = 'Delete';
 $lang['search_button'] = 'Search!';
 $lang['search_placeholder'] = 'Write the Barcode';
 $lang['unknown'] = 'Unknown';
 $lang['add'] = 'Add';
 $lang['add_to_stock'] = ' products added to stock.';
 $lang['remove_from_stock'] = ' products removed from stock.';
+$lang['view_barcodes'] = 'View Barcodes list';
 //colors
 $lang['black']='Black';
 $lang['gray'] = 'Gray';

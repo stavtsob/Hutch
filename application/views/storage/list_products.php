@@ -8,7 +8,6 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col"><?php echo $lang->line('product_barcode'); ?></th>
       <th scope="col"><?php echo $lang->line('product_name'); ?></th>
       <th scope="col"><?php echo $lang->line('product_brand'); ?></th>
       <th scope="col"><?php echo $lang->line('product_color'); ?></th>
@@ -24,7 +23,6 @@
     
     <tr>
       <th scope="row"><?php echo $item['id']?></th>
-      <td><?php echo $item['barcode']?></td>
       <td><?php echo $item['name']?></td>
       <td><?php echo $item['brand']?></td>
       <td><?php echo $item['color']?></td>
@@ -33,8 +31,12 @@
       <td><?php echo $item['stock']?></td>
       <td>
         <form method="GET" action="<?php echo base_url('index.php/view_product')?>">
-          <input type="hidden" name="barcode" value="<?php echo $item['barcode'];?>">
+          <input type="hidden" name="id" value="<?php echo $item['id'];?>">
           <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="<?php echo $lang->line('view_product'); ?>" >
+        </form>
+        <form method="GET" action="<?php echo base_url('index.php/delete_product')?>">
+          <input type="hidden" name="id" value="<?php echo $item['id'];?>">
+          <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="<?php echo $lang->line('delete_product'); ?>" >
         </form>
       </td>
     </tr>

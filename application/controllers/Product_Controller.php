@@ -7,6 +7,7 @@ class Product_Controller extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('item_model');
+        $this->load->model('barcode_model');
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -24,8 +25,9 @@ class Product_Controller extends CI_Controller {
             $name = $this->input->post('name');
             $barcode = $this->input->post('barcode');
             $stock = $this->input->post('stock');
-            if(isset($name) && isset($barcode) && isset($stock))
+            if(isset($name) && isset($stock))
             {
+                //insert product
                 $brand = $this->input->post('brand');
                 $price = $this->input->post('price');
                 $color = $this->input->post('color');
@@ -33,7 +35,6 @@ class Product_Controller extends CI_Controller {
                 $expires_at = $this->input->post('expires_at');
                 $data = array(
                     'name' => $this->input->post('name'),
-                    'barcode' => $this->input->post('barcode'),
                     'stock' => $this->input->post('stock'),
                     'date_created' => date("Y-m-d H:i:s")
                 );
@@ -57,7 +58,16 @@ class Product_Controller extends CI_Controller {
                 {
                     $data['expires_at'] = date($expires_at);
                 }
-                $this->item_model->insert($data);
+                $item_id = $this->item_model->insert($data);
+                //insert barcode
+                if(isset($barcode))
+                {
+                    $b_data = array(
+                        'code' => $barcode,
+                        'item_id' => $item_id
+                    );
+                    $this->barcode_model->insert($b_data);
+                }
                 $this->session->set_flashdata('new_product', 'Ένα νέο προιόν με όνομα '.$name.' προστέθηκε.');
                 redirect(base_url() .'index.php', 'refresh');
             }

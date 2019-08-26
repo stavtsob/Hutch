@@ -37,7 +37,9 @@
     <div class="form-group row">
         <label for="barcode" class="col-sm-2 col-form-label"><?php echo $lang->line('product_barcode'); ?></label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="barcode" name="barcode" value="<?php echo $item['barcode']; ?>" required disabled>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <?php echo $lang->line('view_barcodes');?>
+        </button>
         </div>
     </div>
     <div class="form-group row">
@@ -57,6 +59,7 @@
         <div class="col-sm-10">
         <input type="date" class="form-control" id="expires_at" name="expires_at" value="<?php echo $item['expires_at']; ?>">
         </div>
+        <input type="text" class="form-control" id="id" name="id" value="<?php echo $item['id']; ?>" required hidden>
     </div>
     <div class="form-group row">
         <label for="color" class="col-sm-2 col-form-label"><?php echo $lang->line('product_color'); ?></label>
@@ -89,6 +92,29 @@
     </div>
     </div>
 </form>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Barcodes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <?php
+            foreach($barcodes as $barcode)
+            {
+                echo $barcode['code'] . '<br>';
+            }
+        ?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 </div>
 <script>
@@ -104,11 +130,11 @@
 
 
        var quantity = $("#quantity").val();
-       var barcode = $("#barcode").val();
+       var id = $("#id").val();
         $.ajax({
            url: '<?php echo base_url('index.php/ajax_item_increase');?>',
            type: 'POST',
-           data: {barcode: barcode, quantity: quantity},
+           data: {id: id, quantity: quantity},
            error: function() {
               alert('Κάτι πήγε λάθος.');
            },
@@ -119,19 +145,14 @@
                 }
             else
             {
-                var notif = document.getElementById("notif");
-                var new_notif = notif.cloneNode(true);
-                notification_count++;
-                new_notif.setAttribute("id", "notif_"+notification_count)
                 var item = JSON.parse(data);
-                new_notif.childNodes[0].textContent=quantity+"<?php echo $lang->line('add_to_stock'); ?>";
-                document.getElementById("notifications").appendChild(new_notif);
-                $('#stock').attr('value', item.stock);
-                $('#notif_'+notification_count).show();
                 if(quantity < 0)
                 {
                     quantity = quantity*(-1);
                 }
+                var message = quantity+"<?php echo $lang->line('add_to_stock'); ?>";
+                $('#stock').attr('value', item.stock);
+                addNotification(message);
             }
            }
         });
@@ -140,11 +161,11 @@
     });
     $("#decrease_btn").click(function(){
         var quantity = $("#quantity").val();
-        var barcode = $("#barcode").val();
+        var id = $("#id").val();
         $.ajax({
             url: '<?php echo base_url('index.php/ajax_item_decrease');?>',
             type: 'POST',
-            data: {barcode: barcode, quantity: quantity},
+            data: {id: id, quantity: quantity},
             error: function() {
             alert('Κάτι πήγε λάθος.');
             },
@@ -155,26 +176,34 @@
                 }
                 else
                 {   
-                    var notif = document.getElementById("notif");
-                    var new_notif = notif.cloneNode(true);
-                    notification_count++;
-                    new_notif.setAttribute("id", "notif_"+notification_count)
                     var item = JSON.parse(data);
-                    new_notif.childNodes[0].textContent=quantity+"<?php echo $lang->line('remove_from_stock'); ?>";
-                    document.getElementById("notifications").appendChild(new_notif);
-                    $('#stock').attr('value', item.stock);
-                    $('#notif_'+notification_count).show();
                     if(quantity < 0)
                     {
                         quantity = quantity*(-1);
                     }
-                    
+                    var message =quantity+"<?php echo $lang->line('remove_from_stock'); ?>";
+                    $('#stock').attr('value', item.stock);
+                    addNotification(message);
                 }
             }
         });
 
 
         });
-
+    function addNotification($text)
+    {
+        var notif = document.getElementById("notif");
+        var new_notif = notif.cloneNode(true);
+        notification_count++;
+        new_notif.setAttribute("id", "notif_"+notification_count);
+        new_notif.childNodes[0].textContent= $text;
+        document.getElementById("notifications").appendChild(new_notif);
+        $('#notif_'+notification_count).show();
+        var count = notification_count;
+        setTimeout(function()
+        {
+            $('#notif_'+count).hide();
+        }, 3000);
+    }
 
 </script>
