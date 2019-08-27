@@ -1,11 +1,4 @@
-<div id="notifications">
-    <div id="notif" class="alert alert-warning alert-dismissible fade show" role="alert" style='display: none; margin-bottom: 0px;'>
-    <span id="notif_text"></span>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    </div>
-</div>
+
 <div class="addproduct_form">
 <?php echo validation_errors(); ?>
     <h3><?php echo $lang->line('change_product_stock'); ?></h3>
@@ -125,7 +118,6 @@
         });
 </script>
 <script type="text/javascript">
-    var notification_count=0;
     $("#increase_btn").click(function(){
 
 
@@ -190,20 +182,5 @@
 
 
         });
-    function addNotification($text)
-    {
-        var notif = document.getElementById("notif");
-        var new_notif = notif.cloneNode(true);
-        notification_count++;
-        new_notif.setAttribute("id", "notif_"+notification_count);
-        new_notif.childNodes[0].textContent= $text;
-        document.getElementById("notifications").appendChild(new_notif);
-        $('#notif_'+notification_count).show();
-        var count = notification_count;
-        setTimeout(function()
-        {
-            $('#notif_'+count).hide();
-        }, 3000);
-    }
 
 </script>

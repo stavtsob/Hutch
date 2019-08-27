@@ -2,6 +2,7 @@
 <head>
 <link rel="stylesheet" href="<?php echo base_url('css/style.css');?>">
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+<script src="<?php echo base_url('js/notifications.js');?>" ></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <title><?php echo $app_name;?> - Warehouse Management System</title>
 </head>
@@ -31,14 +32,6 @@
     </form>
   </div>
   </nav>
-  <!-- SHOW NOTIFICATIONS !-->
-  <?php if(isset($notification)){ ?>
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <?php echo $notification;?>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  </div><?php } ?>
   <!-- SHOW ERRORS !-->
   <?php if(isset($error)){ ?>
   <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -47,4 +40,21 @@
     <span aria-hidden="true">&times;</span>
   </button>
   </div><?php } ?>
+  <!-- SHOW NOTIFICATIONS -->
+  <div id="notifications">
+    <div id="notif" class="alert alert-warning alert-dismissible fade show" role="alert" style='display: none; margin-bottom: 0px;'>
+    <span id="notif_text"></span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+</div>
+<?php
+if(isset($notification))
+{
+  echo '<script>';
+  echo 'addNotification("'.$notification.'");';
+  echo '</script>';
+}
+?>
   

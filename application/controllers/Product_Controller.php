@@ -73,22 +73,36 @@ class Product_Controller extends CI_Controller {
             }
         }
     }
-
+    public function delete_item()
+    {
+        $barcode = $this->input->post('barcode');
+        $this->item_model->deleteByBarcode($barcode);
+    }
     public function view_product()
     {
         $data['lang'] = $this->lang;
         if($_SERVER['REQUEST_METHOD'] == 'GET')
         {
+           $id = intval($this->input->get('id'));
            $barcode = $this->input->get('barcode');
-           //barcode-fix
-           $barcode = str_replace(' ','',$barcode);
-           if(isset($barcode))
+           if(isset($barcode) || isset($id))
            {
-               $item = $this->item_model->getByBarcode($barcode);
+               if(isset($barcode))
+               {
+                //barcode-fix
+                $barcode = str_replace(' ','',$barcode);
+                $item = $this->barcode_model->getItem($barcode);
+               }
+               if(isset($id))
+               {
+                $item =$this->item_model->getById($id);
+               }
+               $barcodes = $this->barcode_model->getItemBarcodes($item['id']);
                if($item)
                {
                     $data['app_name'] = 'Hutch';
                     $data['item'] = $item;
+                    $data['barcodes'] = $barcodes;
                     $this->load->view('basics/header',$data);
                     $this->load->view('storage/view_product',$data);
                     $this->load->view('basics/footer',$data);
