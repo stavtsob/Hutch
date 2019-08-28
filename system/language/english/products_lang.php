@@ -22,10 +22,13 @@ $lang['delete_product'] = 'Delete';
 $lang['search_button'] = 'Search!';
 $lang['search_placeholder'] = 'Write the Barcode';
 $lang['unknown'] = 'Unknown';
+//view product elements
 $lang['add'] = 'Add';
 $lang['add_to_stock'] = ' products added to stock.';
 $lang['remove_from_stock'] = ' products removed from stock.';
 $lang['view_barcodes'] = 'View Barcodes list';
+$lang['add_barcode'] = 'Add Barcode';
+$lang['add_barcode_label'] = 'Add Barcode';
 //colors
 $lang['black']='Black';
 $lang['gray'] = 'Gray';

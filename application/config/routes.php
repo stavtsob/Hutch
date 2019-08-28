@@ -51,6 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['ajax_item_decrease']['post'] = 'ajax_controller/decrease_item_stock';
 $route['ajax_item_increase']['post'] = 'ajax_controller/increase_item_stock';
+$route['test'] = 'product_controller/list_products';
+$route['ajax_add_barcode']['post'] = 'ajax_controller/ajax_add_barcode';
 $route['view_product']['get']= 'product_controller/view_product';
 $route['delete_product'] = 'product_controller/delete_item';
 $route['add_product_request']['post']= 'product_controller/create_product';

@@ -38,5 +38,28 @@ class Ajax_Controller extends CI_Controller {
             $updated_item = $this->item_model->getById($item_id);
             echo json_encode($updated_item);
         }
+        public function ajax_add_barcode()
+        {
+            $item_id = $this->input->post('item_id');
+            $barcode = $this->input->post('barcode');
+            if(isset($item_id) && isset($barcode))
+            {
+                $others = $this->barcode_model->getItem($barcode);
+                if($others)
+                {
+                    echo '400';
+                    return;
+                }
+                $data = array(
+                  "code" => $barcode,
+                  "item_id" => $item_id  
+                );
+                $this->barcode_model->insert($data);
+                echo '200';
+                return;
+            }
+            echo '500';
+            return;
+        }
 }
 ?>

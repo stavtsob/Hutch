@@ -102,7 +102,7 @@ class Product_Controller extends CI_Controller {
                 $barcode = str_replace(' ','',$barcode);
                 $item = $this->barcode_model->getItem($barcode);
                }
-               if(isset($id))
+               elseif(isset($id))
                {
                 $item =$this->item_model->getById($id);
                }

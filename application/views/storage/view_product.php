@@ -30,8 +30,11 @@
     <div class="form-group row">
         <label for="barcode" class="col-sm-2 col-form-label"><?php echo $lang->line('product_barcode'); ?></label>
         <div class="col-sm-10">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#barcodes_list">
             <?php echo $lang->line('view_barcodes');?>
+        </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addbarcode">
+            <?= $lang->line("add_barcode") ?>
         </button>
         </div>
     </div>
@@ -85,11 +88,12 @@
     </div>
     </div>
 </form>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- MODALS -->
+<div class="modal fade" id="barcodes_list" tabindex="-1" role="dialog" aria-labelledby="barcodes list" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Barcodes</h5>
+        <h5 class="modal-title" id="barcodes_list_label">Barcodes</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -110,6 +114,27 @@
 </div>
 </div>
 </div>
+<!-- Modal 2-->
+<div class="modal fade" id="addbarcode" tabindex="-1" role="dialog" aria-labelledby="addbarcodelabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addbarcodelabel"><?php echo $lang->line('add_barcode_label');?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" name="barcode" id="new_barcode" style="width:100%;">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="add_barcode_btn"><?php echo $lang->line('add');?></button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END OF MODALS -->
 <script>
         $("#color").val("<?php echo $item['color'];?>")
         $('#color').change(function()
@@ -117,70 +142,7 @@
             $('#color_box').css('background-color',$('#color').val());
         });
 </script>
-<script type="text/javascript">
-    $("#increase_btn").click(function(){
 
 
-       var quantity = $("#quantity").val();
-       var id = $("#id").val();
-        $.ajax({
-           url: '<?php echo base_url('index.php/ajax_item_increase');?>',
-           type: 'POST',
-           data: {id: id, quantity: quantity},
-           error: function() {
-              alert('Κάτι πήγε λάθος.');
-           },
-           success: function(data) {
-            if(data == 'ERROR 500')
-                {
-                    alert('Κάτι πήγε λάθος. Παρακαλώ να ελέγξετε αν η ποσότητα που θέλετε να αφαιρέσετε είναι μικρότερη η ίση από το υπάρχων απόθεμα.');
-                }
-            else
-            {
-                var item = JSON.parse(data);
-                if(quantity < 0)
-                {
-                    quantity = quantity*(-1);
-                }
-                var message = quantity+"<?php echo $lang->line('add_to_stock'); ?>";
-                $('#stock').attr('value', item.stock);
-                addNotification(message);
-            }
-           }
-        });
-
-
-    });
-    $("#decrease_btn").click(function(){
-        var quantity = $("#quantity").val();
-        var id = $("#id").val();
-        $.ajax({
-            url: '<?php echo base_url('index.php/ajax_item_decrease');?>',
-            type: 'POST',
-            data: {id: id, quantity: quantity},
-            error: function() {
-            alert('Κάτι πήγε λάθος.');
-            },
-            success: function(data) {
-                if(data == 'ERROR 500')
-                {
-                    alert('Κάτι πήγε λάθος. Παρακαλώ να ελέγξετε αν η ποσότητα που θέλετε να αφαιρέσετε είναι μικρότερη η ίση από το υπάρχων απόθεμα.');
-                }
-                else
-                {   
-                    var item = JSON.parse(data);
-                    if(quantity < 0)
-                    {
-                        quantity = quantity*(-1);
-                    }
-                    var message =quantity+"<?php echo $lang->line('remove_from_stock'); ?>";
-                    $('#stock').attr('value', item.stock);
-                    addNotification(message);
-                }
-            }
-        });
-
-
-        });
-
-</script>
+<script src="<?php echo base_url('js/ajax/add_barcode.js');?>" type="text/javascript" id="ajax_barcode" data-base_url="<?php echo base_url()?>" data-item_id="<?= $item['id']?>"></script>
+<script src="<?php echo base_url('js/ajax/stock_buttons.js');?>" type="text/javascript" id="ajax_stock_buttons" data-base_url="<?php echo base_url()?>" ></script>
