@@ -5,7 +5,7 @@
   </a>
 </div>
 <table class="table">
-  <thead class="thead-dark">
+  <thead class="thead-themed" id='list_header'>
     <tr>
       <th scope="col">#</th>
       <th scope="col"><?php echo $lang->line('product_name'); ?></th>

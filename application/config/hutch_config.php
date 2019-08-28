@@ -1,4 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $config['app_name'] = 'Hutch';
+$config['language'] = 'english';
 ?>

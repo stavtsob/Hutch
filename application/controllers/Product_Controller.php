@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Product_Controller extends CI_Controller {
+    private $settings;
 
     public function __construct()
     {
@@ -12,8 +13,12 @@ class Product_Controller extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->library('session');
+        //load config
+        $this->config->load('hutch_config',TRUE);
+        $this->settings = $this->config->item('hutch_config');
         //change language labels in /system/language folder files
-        $this->lang->load('products','english');
+        $language = $this->settings['language'];
+        $this->lang->load('products',$language);
     }
 
     public function create_product()
