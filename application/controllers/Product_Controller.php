@@ -68,15 +68,24 @@ class Product_Controller extends CI_Controller {
                     );
                     $this->barcode_model->insert($b_data);
                 }
-                $this->session->set_flashdata('new_product', 'Ένα νέο προιόν με όνομα '.$name.' προστέθηκε.');
+                $this->session->set_flashdata('notification', 'One new product with the name '.$name.' has been added.');
                 redirect(base_url() .'index.php', 'refresh');
             }
         }
     }
     public function delete_item()
     {
-        $barcode = $this->input->post('barcode');
-        $this->item_model->deleteByBarcode($barcode);
+        if($_SERVER['REQUEST_METHOD'] == 'GET')
+        {
+            $id = $this->input->get('id');
+            $this->item_model->deleteById($id);
+            $this->session->set_flashdata('notification', 'Item has been deleted.');
+        }
+        else
+        {
+            $this->session->set_flashdata('error', 'Item not found');
+        }
+        redirect(base_url() .'index.php','refresh');
     }
     public function view_product()
     {
@@ -109,7 +118,7 @@ class Product_Controller extends CI_Controller {
                }
                else
                {
-                    $this->session->set_flashdata('error','Δεν βρέθηκε το barcode ' .$barcode. ' στην βάση δεδομένων.');
+                    $this->session->set_flashdata('error','The barcode ' .$barcode. ' not found on database.');
                     redirect(base_url() .'index.php','refresh');
                }
            }
@@ -126,9 +135,9 @@ class Product_Controller extends CI_Controller {
         $data['lang'] = $this->lang;
         $data['items'] = $this->item_model->getAll();
         $flashdata = $this->session->flashdata();
-        if(isset($flashdata['new_product']))
+        if(isset($flashdata['notification']))
         {
-            $data['notification'] = $flashdata['new_product'];
+            $data['notification'] = $flashdata['notification'];
         }
         if(isset($flashdata['error']))
         {

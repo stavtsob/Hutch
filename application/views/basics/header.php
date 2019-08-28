@@ -7,6 +7,15 @@
 <title><?php echo $app_name;?> - Warehouse Management System</title>
 </head>
 <body>
+<!-- SHOW NOTIFICATIONS -->
+<div id="notifications">
+    <div id="notif" class="alert alert-warning alert-dismissible fade show" role="alert" style='display: none; margin-bottom: 0px;'>
+    <span id="notif_text"></span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+</div>
 <div class="main">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#"><?php echo $app_name;?></a>
@@ -40,15 +49,7 @@
     <span aria-hidden="true">&times;</span>
   </button>
   </div><?php } ?>
-  <!-- SHOW NOTIFICATIONS -->
-  <div id="notifications">
-    <div id="notif" class="alert alert-warning alert-dismissible fade show" role="alert" style='display: none; margin-bottom: 0px;'>
-    <span id="notif_text"></span>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    </div>
-</div>
+  
 <?php
 if(isset($notification))
 {
