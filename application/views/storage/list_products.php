@@ -1,7 +1,7 @@
 <div class="table_title">
   <h3 style="display: inline-block;"><?php echo $lang->line('products_list'); ?></h3>
   <a href="<?php echo base_url() ?>index.php/add_product">
-    <button type="button" id="addproduct_btn" class="btn btn-success"><?php echo $lang->line('add_product'); ?></button>
+    <button type="button" id="addproduct_btn" class="btn btn-warning"><?php echo $lang->line('add_product'); ?></button>
   </a>
 </div>
 <table class="table">
@@ -32,11 +32,11 @@
       <td>
         <form method="GET" action="<?php echo base_url('index.php/view_product')?>">
           <input type="hidden" name="id" value="<?php echo $item['id'];?>">
-          <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="<?php echo $lang->line('view_product'); ?>" >
+          <input class="btn btn-warning my-2 my-sm-0" type="submit" value="<?php echo $lang->line('view_product'); ?>" >
         </form>
         <form method="GET" action="<?php echo base_url('index.php/delete_product')?>">
           <input type="hidden" name="id" value="<?php echo $item['id'];?>">
-          <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="<?php echo $lang->line('delete_product'); ?>" >
+          <input class="btn btn-outline-danger my-2 my-sm-0" type="submit" value="<?php echo $lang->line('delete_product'); ?>" >
         </form>
       </td>
     </tr>

@@ -37,7 +37,7 @@
     </ul>
     <form class="form-inline my-2 my-lg-0" method="GET" action="<?php echo base_url('index.php/view_product')?>">
       <input name="barcode" class="form-control mr-sm-2" type="search" placeholder="<?php echo $lang->line('search_placeholder'); ?>">
-      <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="<?php echo $lang->line('search_button'); ?>" >
+      <input class="btn btn-light my-2 my-sm-0" type="submit" value="<?php echo $lang->line('search_button'); ?>" >
     </form>
   </div>
   </nav>

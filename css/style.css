@@ -1,36 +1,38 @@
 body
 {
-    background-color: rgb(39, 34, 6)!important;
+    background-color: #7086F6!important;
 }
 .main
 {
     margin-left:10%;
-    color: #4D440F;
+    color: #46330C;
     font-size: 18px;
     font-family: Arial,Verdana,Courier, monospace;
     /*margin-top: 25px;*/
     width: 80%;
-    background-color: #FED97D;
+    background-color: #FFFFFF;
 }
 thead.thead-themed
 {
-    background-color: #FDB768;
-    border-color: #FDB768!important;
+    background-color: #FDC963;
+    border-color: #FDC963!important;
 }
 .navbar-themed
 {
-    background-color: #FDB768;
+    background-color: #7086F6;
     -webkit-box-shadow: 0px 11px 10px 0px rgba(0,0,0,0.36);
     -moz-box-shadow: 0px 11px 10px 0px rgba(0,0,0,0.36);
     box-shadow: 0px 11px 10px 0px rgba(0,0,0,0.36);
 }
 a.nav-link, a.navbar-brand
 {
-    color: #4D440F;
+    font-size: 24px;
+    color: #FDC963;
+    text-shadow: -1px 0 6px #46330C, 0 1px 6px #46330C, 1px 0 6px #46330C, 0 -1px 6px #46330C;
 }
 button.navbar-toggler
 {
-    background-color: #4D440F;
+    background-color: #46330C;
     border-radius: 50px;
     height: 30px;
 }
@@ -95,7 +97,7 @@ table
 {
     margin-top: 20px;
     border-radius: 30px;
-    color: #4D440F;
+    color: #46330C;
 }
 h3
 {
@@ -104,7 +106,7 @@ h3
 
 tr:nth-child(even)
 {
-    background-color: #FEEE92;
+    background-color: #FEF3DC;
 }
 td,th
 {

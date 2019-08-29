@@ -30,10 +30,10 @@
     <div class="form-group row">
         <label for="barcode" class="col-sm-2 col-form-label"><?php echo $lang->line('product_barcode'); ?></label>
         <div class="col-sm-10">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#barcodes_list">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#barcodes_list">
             <?php echo $lang->line('view_barcodes');?>
         </button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addbarcode">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addbarcode">
             <?= $lang->line("add_barcode") ?>
         </button>
         </div>
