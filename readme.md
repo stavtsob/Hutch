@@ -11,3 +11,7 @@ What framework the application use?
 ###################################
 
 Hutch is developed in PHP and it uses CodeIgniter framework with bootstrap templates.
+
+###################################
+Screenshots
+###################################
